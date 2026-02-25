@@ -11,9 +11,6 @@ class WatchVideoScreen extends GetView<WatchVideoController> {
 
   @override
   Widget build(BuildContext context) {
-    // Ensuring controller is available
-    Get.put(WatchVideoController());
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -30,7 +27,7 @@ class WatchVideoScreen extends GetView<WatchVideoController> {
                     SizedBox(height: 16.h),
                     // Safety Journey Card
                     _buildSafetyCard(),
-                    
+
                     SizedBox(height: 24.h),
                     // Progress Section
                     _buildProgressSection(),
@@ -38,7 +35,7 @@ class WatchVideoScreen extends GetView<WatchVideoController> {
                 ),
               ),
             ),
-            
+
             // Continue Button (at the bottom)
             _buildContinueButton(),
             SizedBox(height: 20.h),
@@ -83,9 +80,16 @@ class WatchVideoScreen extends GetView<WatchVideoController> {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             shape: BoxShape.circle,
-                            border: Border.all(color: const Color(0xFF22C55E), width: 3),
+                            border: Border.all(
+                              color: const Color(0xFF22C55E),
+                              width: 3,
+                            ),
                           ),
-                          child: Icon(Icons.play_arrow, color: AppColor.primaryDark, size: 30.sp),
+                          child: Icon(
+                            Icons.play_arrow,
+                            color: AppColor.primaryDark,
+                            size: 30.sp,
+                          ),
                         ),
                       ),
                   ],
@@ -143,7 +147,11 @@ class WatchVideoScreen extends GetView<WatchVideoController> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.play_circle_fill, color: Colors.white, size: 18),
+                const Icon(
+                  Icons.play_circle_fill,
+                  color: Colors.white,
+                  size: 18,
+                ),
                 SizedBox(width: 8.w),
                 Text(
                   "Receive Code",
@@ -177,26 +185,32 @@ class WatchVideoScreen extends GetView<WatchVideoController> {
                 color: AppColor.primaryDark,
               ),
             ),
-            Obx(() => Text(
-              "${(controller.progress.value * 100).toInt()}%",
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
-                color: AppColor.primaryDark,
+            Obx(
+              () => Text(
+                "${(controller.progress.value * 100).toInt()}%",
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
+                  color: AppColor.primaryDark,
+                ),
               ),
-            )),
+            ),
           ],
         ),
         SizedBox(height: 8.h),
-        Obx(() => ClipRRect(
-          borderRadius: BorderRadius.circular(10.r),
-          child: LinearProgressIndicator(
-            value: controller.progress.value,
-            minHeight: 8.h,
-            backgroundColor: const Color(0xFFE2E8F0),
-            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF0F172A)),
+        Obx(
+          () => ClipRRect(
+            borderRadius: BorderRadius.circular(10.r),
+            child: LinearProgressIndicator(
+              value: controller.progress.value,
+              minHeight: 8.h,
+              backgroundColor: const Color(0xFFE2E8F0),
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                Color(0xFF0F172A),
+              ),
+            ),
           ),
-        )),
+        ),
       ],
     );
   }
@@ -207,11 +221,17 @@ class WatchVideoScreen extends GetView<WatchVideoController> {
       child: Obx(() {
         final isFinished = controller.isVideoFinished.value;
         return ElevatedButton(
-          onPressed: isFinished ? () => Get.toNamed(AppRoute.promoCode) : null, // Navigate to Promo Code
+          onPressed: isFinished
+              ? () => Get.toNamed(AppRoute.promoCode)
+              : null, // Navigate to Promo Code
           style: ElevatedButton.styleFrom(
-            backgroundColor: isFinished ? const Color(0xFF94A3B8) : const Color(0xFF94A3B8).withOpacity(0.5),
+            backgroundColor: isFinished
+                ? const Color(0xFF94A3B8)
+                : const Color(0xFF94A3B8).withOpacity(0.5),
             minimumSize: Size(double.infinity, 56.h),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
             elevation: 0,
           ),
           child: Text(

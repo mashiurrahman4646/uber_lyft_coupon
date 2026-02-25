@@ -15,62 +15,73 @@ class PromoCodeScreen extends GetView<PromoCodeController> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Column(
-            children: [
-              SizedBox(height: 16.h),
-              // Back Button
-              Align(
-                alignment: Alignment.centerLeft,
-                child: IconButton(
-                  onPressed: () => Get.offAllNamed(AppRoute.home),
-                  icon: Container(
-                    padding: EdgeInsets.all(8.r),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF1F5F9),
-                      borderRadius: BorderRadius.circular(12.r),
+        child: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Column(
+                  children: [
+                    SizedBox(height: 16.h),
+                    // Back Button
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: IconButton(
+                        onPressed: () => Get.offAllNamed(AppRoute.home),
+                        icon: Container(
+                          padding: EdgeInsets.all(8.r),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF1F5F9),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Icon(
+                            Icons.arrow_back_ios_new,
+                            color: AppColor.primaryDark,
+                            size: 20.sp,
+                          ),
+                        ),
+                      ),
                     ),
-                    child: Icon(Icons.arrow_back_ios_new, color: AppColor.primaryDark, size: 20.sp),
-                  ),
+
+                    SizedBox(height: 20.h),
+                    // Top Icon Section
+                    _buildSuccessIcon(),
+
+                    SizedBox(height: 24.h),
+                    // Title and Subtitle
+                    Text(
+                      "You're making a safe choice",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w800,
+                        color: AppColor.primaryDark,
+                      ),
+                    ),
+                    SizedBox(height: 8.h),
+                    Text(
+                      "Your exclusive promo code is ready to use",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppColor.textGray,
+                      ),
+                    ),
+
+                    SizedBox(height: 40.h),
+                    // Promo Code Card
+                    _buildPromoCard(),
+
+                    const Spacer(),
+                    // Info Box at the bottom
+                    _buildInfoBox(),
+                    SizedBox(height: 40.h),
+                  ],
                 ),
               ),
-              
-              SizedBox(height: 20.h),
-              // Top Icon Section
-              _buildSuccessIcon(),
-              
-              SizedBox(height: 24.h),
-              // Title and Subtitle
-              Text(
-                "You're making a safe choice",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 22.sp,
-                  fontWeight: FontWeight.w800,
-                  color: AppColor.primaryDark,
-                ),
-              ),
-              SizedBox(height: 8.h),
-              Text(
-                "Your exclusive promo code is ready to use",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: AppColor.textGray,
-                ),
-              ),
-              
-              SizedBox(height: 40.h),
-              // Promo Code Card
-              _buildPromoCard(),
-              
-              const Spacer(),
-              // Info Box at the bottom
-              _buildInfoBox(),
-              SizedBox(height: 40.h),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -103,11 +114,7 @@ class PromoCodeScreen extends GetView<PromoCodeController> {
                   shape: BoxShape.circle,
                 ),
                 child: Center(
-                  child: Icon(
-                    Icons.shield,
-                    color: Colors.white,
-                    size: 40.r,
-                  ),
+                  child: Icon(Icons.shield, color: Colors.white, size: 40.r),
                 ),
               ),
             ),
@@ -121,11 +128,7 @@ class PromoCodeScreen extends GetView<PromoCodeController> {
                 color: Color(0xFF1E293B), // Dark circle for checkmark
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                Icons.check,
-                color: Colors.white,
-                size: 16.r,
-              ),
+              child: Icon(Icons.check, color: Colors.white, size: 16.r),
             ),
           ),
         ],
@@ -185,7 +188,9 @@ class PromoCodeScreen extends GetView<PromoCodeController> {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF0F172A),
               minimumSize: Size(double.infinity, 56.h),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.r),
+              ),
               elevation: 0,
             ),
             child: Row(

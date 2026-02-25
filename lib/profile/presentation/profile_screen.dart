@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../app_colore/app_colore.dart';
+import '../../approut.dart';
 import '../controller/profile_controller.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
@@ -19,7 +20,27 @@ class ProfileScreen extends GetView<ProfileController> {
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(
               children: [
-                SizedBox(height: 40.h),
+                SizedBox(height: 16.h),
+                // Back Button
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    onPressed: () => Get.offAllNamed(AppRoute.home),
+                    icon: Container(
+                      padding: EdgeInsets.all(8.r),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF1F5F9),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: AppColor.primaryDark,
+                        size: 20.sp,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.h),
                 _buildHeader(),
                 SizedBox(height: 32.h),
                 _buildEmailSection(),
@@ -65,10 +86,7 @@ class ProfileScreen extends GetView<ProfileController> {
         SizedBox(height: 4.h),
         Text(
           controller.joinDate,
-          style: TextStyle(
-            fontSize: 14.sp,
-            color: AppColor.textGray,
-          ),
+          style: TextStyle(fontSize: 14.sp, color: AppColor.textGray),
         ),
       ],
     );
@@ -134,7 +152,11 @@ class ProfileScreen extends GetView<ProfileController> {
                   color: AppColor.primaryDark.withOpacity(0.7),
                 ),
               ),
-              Icon(Icons.confirmation_num_outlined, size: 18.sp, color: AppColor.textGray),
+              Icon(
+                Icons.confirmation_num_outlined,
+                size: 18.sp,
+                color: AppColor.textGray,
+              ),
             ],
           ),
         ),
@@ -185,7 +207,11 @@ class ProfileScreen extends GetView<ProfileController> {
               SizedBox(height: 16.h),
               _buildPromoInfoRow("Expires", controller.promoExpiry),
               SizedBox(height: 12.h),
-              _buildPromoInfoRow("Discount", controller.promoDiscount, isGreen: true),
+              _buildPromoInfoRow(
+                "Discount",
+                controller.promoDiscount,
+                isGreen: true,
+              ),
             ],
           ),
         ),
@@ -193,7 +219,11 @@ class ProfileScreen extends GetView<ProfileController> {
     );
   }
 
-  Widget _buildPromoInfoRow(String label, String value, {bool isGreen = false}) {
+  Widget _buildPromoInfoRow(
+    String label,
+    String value, {
+    bool isGreen = false,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -227,7 +257,11 @@ class ProfileScreen extends GetView<ProfileController> {
             padding: EdgeInsets.all(12.r),
             child: Row(
               children: [
-                Icon(Icons.person_outline, size: 18.sp, color: AppColor.primaryDark),
+                Icon(
+                  Icons.person_outline,
+                  size: 18.sp,
+                  color: AppColor.primaryDark,
+                ),
                 SizedBox(width: 8.w),
                 Text(
                   "User Information",
@@ -256,7 +290,11 @@ class ProfileScreen extends GetView<ProfileController> {
     );
   }
 
-  Widget _buildSettingsItem({required IconData icon, required String title, required VoidCallback onTap}) {
+  Widget _buildSettingsItem({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -264,7 +302,9 @@ class ProfileScreen extends GetView<ProfileController> {
         border: Border.all(color: const Color(0xFFF1F5F9)),
       ),
       child: ListTile(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
         onTap: onTap,
         leading: Container(
           padding: EdgeInsets.all(8.r),
@@ -282,7 +322,11 @@ class ProfileScreen extends GetView<ProfileController> {
             color: const Color(0xFF475569),
           ),
         ),
-        trailing: Icon(Icons.arrow_forward_ios, size: 14.sp, color: const Color(0xFF94A3B8)),
+        trailing: Icon(
+          Icons.arrow_forward_ios,
+          size: 14.sp,
+          color: const Color(0xFF94A3B8),
+        ),
       ),
     );
   }

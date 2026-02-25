@@ -11,9 +11,6 @@ class Homescreen extends GetView<HomescreenController> {
 
   @override
   Widget build(BuildContext context) {
-    // Putting controller here for demonstration, usually put in Binding
-    Get.put(HomescreenController());
-    
     return Scaffold(
       key: controller.scaffoldKey,
       backgroundColor: AppColor.white,

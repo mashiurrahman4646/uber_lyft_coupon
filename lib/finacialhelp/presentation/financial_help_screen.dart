@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../app_colore/app_colore.dart';
+import '../../approut.dart';
 import '../controller/financial_help_controller.dart';
 
 class FinancialHelpScreen extends GetView<FinancialHelpController> {
@@ -19,7 +20,27 @@ class FinancialHelpScreen extends GetView<FinancialHelpController> {
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(
               children: [
-                SizedBox(height: 40.h),
+                SizedBox(height: 16.h),
+                // Back Button
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    onPressed: () => Get.offAllNamed(AppRoute.home),
+                    icon: Container(
+                      padding: EdgeInsets.all(8.r),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF1F5F9),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: AppColor.primaryDark,
+                        size: 20.sp,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.h),
                 _buildLogo(),
                 SizedBox(height: 32.h),
                 _buildTitle(),
@@ -56,11 +77,7 @@ class FinancialHelpScreen extends GetView<FinancialHelpController> {
                   shape: BoxShape.circle,
                 ),
                 child: Center(
-                  child: Icon(
-                    Icons.shield,
-                    color: Colors.white,
-                    size: 40.r,
-                  ),
+                  child: Icon(Icons.shield, color: Colors.white, size: 40.r),
                 ),
               ),
             ),
@@ -74,11 +91,7 @@ class FinancialHelpScreen extends GetView<FinancialHelpController> {
                 color: Color(0xFF1E293B),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                Icons.check,
-                color: Colors.white,
-                size: 16.r,
-              ),
+              child: Icon(Icons.check, color: Colors.white, size: 16.r),
             ),
           ),
         ],
@@ -137,10 +150,18 @@ class FinancialHelpScreen extends GetView<FinancialHelpController> {
           _buildTextField(controller.emailController, "your.email@example.com"),
           SizedBox(height: 20.h),
           _buildFieldLabel("Description of the Incident"),
-          _buildTextField(controller.descriptionController, "Please provide details about the incident and how it has affected your family", maxLines: 4),
+          _buildTextField(
+            controller.descriptionController,
+            "Please provide details about the incident and how it has affected your family",
+            maxLines: 4,
+          ),
           SizedBox(height: 20.h),
           _buildFieldLabel("Required Financial Help Amount"),
-          _buildTextField(controller.amountController, "0.00", prefixText: r"$ "),
+          _buildTextField(
+            controller.amountController,
+            "0.00",
+            prefixText: r"$ ",
+          ),
           SizedBox(height: 20.h),
           _buildFieldLabel("Supporting Documents", isOptional: true),
           _buildFileUploadPlaceholder(),
@@ -190,15 +211,27 @@ class FinancialHelpScreen extends GetView<FinancialHelpController> {
     );
   }
 
-  Widget _buildTextField(TextEditingController controller, String hint, {int maxLines = 1, String? prefixText}) {
+  Widget _buildTextField(
+    TextEditingController controller,
+    String hint, {
+    int maxLines = 1,
+    String? prefixText,
+  }) {
     return TextField(
       controller: controller,
       maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: TextStyle(fontSize: 13.sp, color: AppColor.textGray.withOpacity(0.5)),
+        hintStyle: TextStyle(
+          fontSize: 13.sp,
+          color: AppColor.textGray.withOpacity(0.5),
+        ),
         prefixText: prefixText,
-        prefixStyle: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600, color: AppColor.primaryDark),
+        prefixStyle: TextStyle(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w600,
+          color: AppColor.primaryDark,
+        ),
         filled: true,
         fillColor: const Color(0xFFF8FAFC),
         contentPadding: EdgeInsets.all(16.r),
@@ -230,18 +263,20 @@ class FinancialHelpScreen extends GetView<FinancialHelpController> {
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(color: const Color(0xFFF1F5F9)),
         ),
-        child: Obx(() => Text(
-          controller.selectedFile.value?.name ?? "No file chosen",
-          style: TextStyle(
-            fontSize: 13.sp,
-            color: controller.selectedFile.value != null 
-              ? AppColor.primaryDark 
-              : AppColor.textGray.withOpacity(0.6),
-            fontWeight: controller.selectedFile.value != null 
-              ? FontWeight.w600 
-              : FontWeight.normal,
+        child: Obx(
+          () => Text(
+            controller.selectedFile.value?.name ?? "No file chosen",
+            style: TextStyle(
+              fontSize: 13.sp,
+              color: controller.selectedFile.value != null
+                  ? AppColor.primaryDark
+                  : AppColor.textGray.withOpacity(0.6),
+              fontWeight: controller.selectedFile.value != null
+                  ? FontWeight.w600
+                  : FontWeight.normal,
+            ),
           ),
-        )),
+        ),
       ),
     );
   }
@@ -252,7 +287,9 @@ class FinancialHelpScreen extends GetView<FinancialHelpController> {
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF0F172A),
         minimumSize: Size(double.infinity, 56.h),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
         elevation: 4,
         shadowColor: Colors.black.withOpacity(0.3),
       ),
